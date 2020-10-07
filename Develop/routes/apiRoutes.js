@@ -2,10 +2,12 @@ const path = require('path');
 const notes = require('../db/db.json');
 
 module.exports = function(app) {  
+    // GET to show all JSON notes
     app.get('/api/notes', function(req, res) {
         res.json(notes);
     });
     
+    // POST to add a JSON object note
     app.post('/api/notes', function(req, res) {
         const note = {
             id: notes.length,
@@ -16,6 +18,7 @@ module.exports = function(app) {
         res.json(notes);
     });
     
+    // GET for a particular note JSON object -- used for testing
     app.get('/api/notes/:id', function(req, res) {
         let id = req.params.id;
         for (let i = 0; i < notes.length; i++){
@@ -25,7 +28,8 @@ module.exports = function(app) {
             }
         };
     });
-    
+
+    // DELETE for a particular note JSON object
     app.delete('/api/notes/:id', function(req, res) {
         let id = req.params.id;
         for (let i = 0; i < notes.length; i++){
